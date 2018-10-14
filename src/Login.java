@@ -8,30 +8,30 @@ public class Login extends JFrame {
     public Login() {
         init();
     }
-
     private JPanel
-            PanelInput = new JPanel(new GridLayout(2, 2, 1, 1)),
-            PanelButton = new JPanel(new GridLayout(1, 4, 1, 1));
+            jPanel_Input = new JPanel(new GridLayout(2, 2, 1, 1)),
+            jPanel_Button = new JPanel(new GridLayout(1, 4, 1, 1));
     private JPasswordField
             FiedAccount = new JPasswordField() ;
-    protected JPasswordField FiedPassword = new JPasswordField();
-
+    protected JPasswordField
+            FiedPassword = new JPasswordField();
     private JButton
-            KeyB = new JButton(" < 小鍵盤"),
-            LoginB = new JButton("登入"),
+            Login = new JButton("登入"),
             Exit = new JButton("離開");
-    private Font font = new Font(null, Font.BOLD, 18);
+    protected JButton
+            KeyB = new JButton(" < 小鍵盤");
+    private Font
+            font = new Font(null, Font.BOLD, 18);
     private JLabel
             jLabel_Account = new JLabel("Account : ",SwingConstants.CENTER),
             jLable_Password = new JLabel("Password : ",SwingConstants.CENTER);
     private String
-            Account = "1",
-            Password = "0";
-    private Container ct = this.getContentPane();
-    private KeyBoard keyBoard;
+            Account = "0",
+            Password = "1";
+    private Container
+            ct = this.getContentPane();
     private Dimension
             screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-
     private void init() {
         this.setLocation((screenSize.width)/2-158,50);
 //        this.setBounds(820, 40, 400, 200);
@@ -41,31 +41,27 @@ public class Login extends JFrame {
         ct.setLayout(new BorderLayout());
         jLabel_Account.setFont(font);
         jLable_Password.setFont(font);
-        PanelInput.setPreferredSize(new Dimension(300,70));
-        PanelButton.setPreferredSize(new Dimension(300, 40));
-        LoginB.addActionListener(new ActionListener() {
+        jPanel_Input.setPreferredSize(new Dimension(300,70));
+        jPanel_Button.setPreferredSize(new Dimension(300, 40));
+        Login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (String.valueOf(FiedAccount.getPassword()).equals(Account) && String.valueOf(FiedPassword.getPassword()).equals(Password)) {
-                    MainFrame mainFrame = new MainFrame();
-                    mainFrame.setVisible(true);
-                    System.out.println("成功");
-
+                if (String.valueOf(FiedAccount.getPassword()).equals(Account) &&
+                        String.valueOf(FiedPassword.getPassword()).equals(Password))
+                {
+                    new MainFrame();
                     dispose();
-
                 } else {
                     FiedAccount.setBackground(new Color(226, 162, 156));
                     FiedPassword.setBackground(new Color(226, 162, 156));
-                    System.out.println(FiedPassword.getPassword());
                 }
             }
         });
-
         KeyB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                KeyB.setEnabled(false);
                 new KeyBoard(Login.this);
-                keyBoard.setVisible(true);
             }
         });
 
@@ -76,20 +72,16 @@ public class Login extends JFrame {
             }
         });
         /*-------------------Add-------------------*/
-        PanelInput.add(jLabel_Account);
-        PanelInput.add(FiedAccount);
-        PanelInput.add(jLable_Password);
-        PanelInput.add(FiedPassword);
-        PanelButton.add(KeyB);
-        PanelButton.add(LoginB);
-        PanelButton.add(Exit);
-        ct.add(PanelInput, BorderLayout.CENTER);
-        ct.add(PanelButton, BorderLayout.SOUTH);
+        jPanel_Input.add(jLabel_Account);
+        jPanel_Input.add(FiedAccount);
+        jPanel_Input.add(jLable_Password);
+        jPanel_Input.add(FiedPassword);
+        jPanel_Button.add(KeyB);
+        jPanel_Button.add(Login);
+        jPanel_Button.add(Exit);
+        ct.add(jPanel_Input, BorderLayout.CENTER);
+        ct.add(jPanel_Button, BorderLayout.SOUTH);
         this.pack();
-
-        System.out.println(this.getWidth());
-        System.out.println(this.getHeight());
-
     }
 
     public static void main(String[] args) {

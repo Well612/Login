@@ -22,7 +22,6 @@ public class MainFrame extends JFrame {
             Item_Read =new JMenuItem("讀取"),
             Item_Exit =new JMenuItem("離開"),
 
-
             Item_OOXX =new JMenuItem("OOXX"),
             Item_RamdomKeyboard =new JMenuItem("亂數鍵盤"),
 
@@ -58,7 +57,7 @@ public class MainFrame extends JFrame {
         Item_RamdomKeyboard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RandomKeyboard();
+//                new RandomKeyboard();
                 dispose();
             }
         });

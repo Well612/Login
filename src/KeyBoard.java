@@ -2,9 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public class KeyBoard extends JFrame {
     public KeyBoard (Login login) {
-        Init(login.FiedPassword,login.getX());
+        Init(login.FiedPassword,login.getX(),login.KeyB);
     }
     private JButton
             jButton_Clear = new JButton("清除"),
@@ -18,13 +21,18 @@ public class KeyBoard extends JFrame {
     private Font
             Font_Passeword =new Font(null,Font.BOLD,40),
             Font_Word =new Font(null,Font.BOLD,17);
-    private void Init(JPasswordField LoginPassword,int x){
+    private void Init(JPasswordField LoginPassword,int x,JButton KeyB){
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setBounds(x-280,40,250,400);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("keyboard.png"));
         this.setVisible(true);
         this.setTitle("密碼小鍵盤");
-
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                KeyB.setEnabled(true);
+            }
+        });
         cp = this.getContentPane();
         cp.setLayout(new BorderLayout());
         jPanel_Input.setBackground(Color.BLACK);
@@ -84,6 +92,7 @@ public class KeyBoard extends JFrame {
         jButton_Input[3][2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                KeyB.setEnabled(true);
                 dispose();
             }
         });
