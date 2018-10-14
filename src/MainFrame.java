@@ -24,6 +24,7 @@ public class MainFrame extends JFrame {
 
             Item_OOXX =new JMenuItem("OOXX"),
             Item_RamdomKeyboard =new JMenuItem("亂數鍵盤"),
+            Item_CaesarCipher =new JMenuItem("凱薩加密"),
 
             Item_Setting =new JMenuItem("設定"),
             Item_Introduction =new JMenuItem("開發者介紹");
@@ -58,6 +59,13 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                new RandomKeyboard();
+//                dispose();
+            }
+        });
+        Item_CaesarCipher.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CaesarCipher();
                 dispose();
             }
         });
@@ -79,6 +87,7 @@ public class MainFrame extends JFrame {
         jMenu_Option.add(Item_Read);
         jMenu_Option.add(Item_Exit);
         jMenu_HomeWord.add(Item_RamdomKeyboard);
+        jMenu_HomeWord.add(Item_CaesarCipher);
         jMenu_HomeWord.add(jMenu_HomeWord_Game);
         jMenu_HomeWord_Game.add(Item_OOXX);
         jMenu_Tool.add(Item_Setting);
