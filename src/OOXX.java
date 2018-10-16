@@ -12,14 +12,15 @@ public class OOXX extends JFrame {
     private Container cp;
     private JLabel jLabel = new JLabel("O優先");
     private JButton
-            Button_Run = new JButton("Play"),
-            Button_Exit = new JButton("EXIT"),
-            Button_OX[][] = new JButton[3][3];  //2維陣列按鈕
+            jButton_Run = new JButton("Play"),
+            jButton_Exit = new JButton("EXIT"),
+            jButton_OX[][] = new JButton[3][3];  //2維陣列按鈕
     private JPanel
-            Panel_OX = new JPanel(new GridLayout(3, 3, 3, 3)),
-            Panel_Options = new JPanel(new GridLayout(1, 2, 3, 3));
+            jPanel_OX = new JPanel(new GridLayout(3, 3, 3, 3)),
+            jPanel_Options = new JPanel(new GridLayout(1, 2, 3, 3));
     private boolean
             Boolean_flag = true,
+            Boolean_sequence =true,
             Boolean_BtnText_Enabled = true;
 
     private void init()
@@ -31,11 +32,11 @@ public class OOXX extends JFrame {
         jLabel.setPreferredSize(new Dimension(600,50));
         jLabel.setFont(new Font(null,Font.BOLD,28));
         jLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        Panel_Options.setPreferredSize(new Dimension(600,40));
-        Panel_Options.add(Button_Run);
-        Panel_Options.add(Button_Exit);
-        cp.add(Panel_OX, BorderLayout.CENTER);
-        cp.add(Panel_Options, BorderLayout.SOUTH);
+        jPanel_Options.setPreferredSize(new Dimension(600,40));
+        jPanel_Options.add(jButton_Run);
+        jPanel_Options.add(jButton_Exit);
+        cp.add(jPanel_OX, BorderLayout.CENTER);
+        cp.add(jPanel_Options, BorderLayout.SOUTH);
         cp.add(jLabel,BorderLayout.NORTH);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -45,16 +46,16 @@ public class OOXX extends JFrame {
         });
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                Button_OX[i][j] = new JButton();
-                Panel_OX.add(Button_OX[i][j]);  //新增
-                Button_OX[i][j].setEnabled(false);
-                Button_OX[i][j].setBackground(new Color(255, 255, 255));  //背景顏色
-                Button_OX[i][j].setFont(new Font(null, Font.BOLD, 72));
-                Button_OX[i][j].addActionListener(new ActionListener() {
+                jButton_OX[i][j] = new JButton();
+                jPanel_OX.add(jButton_OX[i][j]);  //新增
+                jButton_OX[i][j].setEnabled(false);
+                jButton_OX[i][j].setBackground(new Color(255, 255, 255));  //背景顏色
+                jButton_OX[i][j].setFont(new Font(null, Font.BOLD, 72));
+                jButton_OX[i][j].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Button_Run.setText("Replay");
-                        Button_Run.setEnabled(true);
+                        jButton_Run.setText("Replay");
+                        jButton_Run.setEnabled(true);
                         JButton tempBtn = (JButton) e.getSource(); //臨時按鈕ｅ事件
                         if (tempBtn.getText().equals("")) {
                             if (Boolean_flag == true) {
@@ -69,25 +70,27 @@ public class OOXX extends JFrame {
                 });
             }
         }
-        Button_Run.addActionListener(new ActionListener() {
+        jButton_Run.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Button_Run.setEnabled(false);
+
+                jButton_Run.setEnabled(false);
                 Boolean_BtnText_Enabled = !Boolean_BtnText_Enabled;
-                if(Boolean_flag==true){
+                if(Boolean_sequence == true){
                     jLabel.setText("O優先");
                 }
-                else
+                else{
                     jLabel.setText("X優先");
+                }
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        Button_OX[i][j].setEnabled(true);
-                        Button_OX[i][j].setText("");
+                        jButton_OX[i][j].setEnabled(true);
+                        jButton_OX[i][j].setText("");
                     }
                 }
             }
         });
-        Button_Exit.addActionListener(new ActionListener() {
+        jButton_Exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -99,58 +102,90 @@ public class OOXX extends JFrame {
 
     private void checkStat() {
         /* --------------行判斷-----------------*/
-        if (Button_OX[0][0].getText().equals(Button_OX[0][1].getText()) &&
-                Button_OX[0][0].getText().equals(Button_OX[0][2].getText()) &&
-                !Button_OX[0][0].getText().equals(""))
+        if (jButton_OX[0][0].getText().equals(jButton_OX[0][1].getText()) &&
+                jButton_OX[0][0].getText().equals(jButton_OX[0][2].getText()) &&
+                !jButton_OX[0][0].getText().equals(""))
         {
             JOptionPane(0,0);
-             }
-        else if( Button_OX[1][0].getText().equals(Button_OX[1][1].getText()) &&
-                Button_OX[1][0].getText().equals(Button_OX[1][2].getText()) &&
-                !Button_OX[1][0].getText().equals(""))
+        }
+        else if( jButton_OX[1][0].getText().equals(jButton_OX[1][1].getText()) &&
+                jButton_OX[1][0].getText().equals(jButton_OX[1][2].getText()) &&
+                !jButton_OX[1][0].getText().equals(""))
         {
             JOptionPane(1,0);
-            }
-        else if(Button_OX[2][0].getText().equals(Button_OX[2][1].getText()) &&
-                Button_OX[2][0].getText().equals(Button_OX[2][2].getText()) &&
-                !Button_OX[2][0].getText().equals(""))
+        }
+        else if(jButton_OX[2][0].getText().equals(jButton_OX[2][1].getText()) &&
+                jButton_OX[2][0].getText().equals(jButton_OX[2][2].getText()) &&
+                !jButton_OX[2][0].getText().equals(""))
         {
             JOptionPane(2,0);
-            }
+        }
         /* --------------直判斷-----------------*/
-        else if (Button_OX[0][0].getText().equals(Button_OX[1][0].getText()) &&
-                Button_OX[0][0].getText().equals(Button_OX[2][0].getText()) &&
-                !Button_OX[0][0].getText().equals(""))
+        else if (jButton_OX[0][0].getText().equals(jButton_OX[1][0].getText()) &&
+                jButton_OX[0][0].getText().equals(jButton_OX[2][0].getText()) &&
+                !jButton_OX[0][0].getText().equals(""))
         {
             JOptionPane(0,0);
-             }
-        else if (Button_OX[0][1].getText().equals(Button_OX[1][1].getText()) &&
-                Button_OX[0][1].getText().equals(Button_OX[2][1].getText()) &&
-                !Button_OX[0][1].getText().equals(""))
+        }
+        else if (jButton_OX[0][1].getText().equals(jButton_OX[1][1].getText()) &&
+                jButton_OX[0][1].getText().equals(jButton_OX[2][1].getText()) &&
+                !jButton_OX[0][1].getText().equals(""))
         {
             JOptionPane(0,1);
-             }
-        else if (Button_OX[0][2].getText().equals(Button_OX[1][2].getText()) &&
-                Button_OX[0][2].getText().equals(Button_OX[2][2].getText()) &&
-                !Button_OX[0][2].getText().equals(""))
+        }
+        else if (jButton_OX[0][2].getText().equals(jButton_OX[1][2].getText()) &&
+                jButton_OX[0][2].getText().equals(jButton_OX[2][2].getText()) &&
+                !jButton_OX[0][2].getText().equals(""))
         {
             JOptionPane(0,2);
-             }
+        }
         /* --------------斜判斷-----------------*/
-        else if (Button_OX[0][0].getText().equals(Button_OX[1][1].getText()) &&
-                Button_OX[0][0].getText().equals(Button_OX[2][2].getText()) &&
-                !Button_OX[0][0].getText().equals(""))
+        else if (jButton_OX[0][0].getText().equals(jButton_OX[1][1].getText()) &&
+                jButton_OX[0][0].getText().equals(jButton_OX[2][2].getText()) &&
+                !jButton_OX[0][0].getText().equals(""))
         {
             JOptionPane(0,0);
-             }
-        else if (Button_OX[0][2].getText().equals(Button_OX[1][1].getText()) &&
-                Button_OX[0][2].getText().equals(Button_OX[2][0].getText()) &&
-                !Button_OX[0][2].getText().equals(""))
+        }
+        else if (jButton_OX[0][2].getText().equals(jButton_OX[1][1].getText()) &&
+                jButton_OX[0][2].getText().equals(jButton_OX[2][0].getText()) &&
+                !jButton_OX[0][2].getText().equals(""))
         {
             JOptionPane(0,2);
-             }
+        }
+        else
+        {
+            int aa=9;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if(jButton_OX[i][j].getText().length()!=0){
+                        aa--;
+                    }
+                }
+            }
+            if(aa==0){
+                jButton_OX_EnabledFalse();
+                JOptionPane.showMessageDialog(OOXX.this,  "平手");
+            }
+        }
     }
+
     public void JOptionPane(int i,int j){
-        JOptionPane.showMessageDialog(OOXX.this,  Button_OX[i][j].getText()+"贏了!!");
+        JOptionPane.showMessageDialog(OOXX.this,  jButton_OX[i][j].getText()+"贏了!!");
+        jButton_OX_EnabledFalse();
     }
+
+    public void jButton_OX_EnabledFalse(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Boolean_sequence = !Boolean_sequence;
+                Boolean_flag = Boolean_sequence;
+                jButton_OX[i][j].setEnabled(false);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new OOXX();
+    }
+
 }
